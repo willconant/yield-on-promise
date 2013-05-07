@@ -21,7 +21,7 @@ resolved or rejected. Here's a complete example:
     }
 
 In the example, `addLater()` returns a promise that is resolved with the sum of its arguments
-on the next turn of the event loop. The function that is run in the fiber is able to pause execution
+on the next turn of the event loop. The function that runs in the fiber is able to pause execution
 until the promise is resolved by passing the promise to `yop()`.
 
 ## Why does this exist? ##
@@ -29,16 +29,15 @@ until the promise is resolved by passing the promise to `yop()`.
 Fibers are the most powerful way to manage asynchronous complexity in node, but they are so foreign
 to the "node way" of doing things that very few npm modules rely on them.
 
-Promises are the next best thing, and publishing an npm module that produces promises by default is
-a reasonable alternative to node's traditional callback-last style that won't alienate users.
+Promises are the next best thing to fibers, and many npm modules produce promises by default.
 
 Yield-on-promise is a tiny shim between fibers and promises that allows users of fibers to take
 full advantage of modules that produce and consume promises.
 
-## Can help modules that consume promises interact with fibers? ##
+## Consuming fibers as promises ##
 
-Yup. Yield-on-promise comes with a utility function for running a function in a fiber and promising
-the results:
+Yield-on-promise comes with a utility function for running a function in a fiber and promising the
+results:
 
     var yop = require('yield-on-promise');
     
