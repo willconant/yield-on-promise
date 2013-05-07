@@ -34,7 +34,7 @@ function yieldOnPromise(promiseOrValue) {
 		currentFiber.run(value);
 	}, function(reason) {
 		currentFiber.throwInto(reason);
-	});
+	}).done();
 	
 	return Fiber.yield();
 }
